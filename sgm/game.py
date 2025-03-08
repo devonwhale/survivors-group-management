@@ -16,7 +16,7 @@ def game():
         for dead_survivor in dead_survivors:
             survivors.remove(dead_survivor)
         day += 1
-    print('The outpost has fallen')
+    print(f'The outpost has fallen after {day} days')
 
 def setup_survivors():
     survivors = []
