@@ -4,7 +4,9 @@ import random
 
 def game():
     print('Welcome to Survivors Group Management!')
+    print('You are the last person at your outpost that has the courage to travel outside a search for food')
     survivors = setup_survivors()
+    print(f'There are {len(survivors)} people counting on you. Good luck!')
     player = Survivor(100, 100)
     day = 1
     while len(survivors) > 0:
