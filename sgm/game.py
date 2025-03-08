@@ -13,6 +13,39 @@ def game():
         number_of_actions = math.floor(player.health / 10)
         print(f'You have {number_of_actions} actions available today')
 
+        actions = []
+        while sum(actions) != number_of_actions:
+            print('Please provide a space separated list of how you would like to allocate your actions')
+            print('1) Scavenge')
+            print('2) Rest')
+            actions = list(map(int, input().split()))
+            if len(actions) != 2:
+                actions = []
+
+        # Scavenge
+        if actions[0] > 0:
+            food = math.floor(random.randrange(0, actions[0]) / 2)
+            print(f'You have found {food} pieces of food')
+            while player.hunger < 50 and food > 0:
+                player.hunger += 7
+                food -= 1
+                print('You have eaten some of the food to keep your strength up')
+            survivors = sorted(survivors, key = lambda s : s.hunger)
+            for index, _ in enumerate(range(0, food)):
+                if index >= len(survivors):
+                    break
+                survivors[index].hunger += 7
+
+        # Rest
+        if actions[1] > 0:
+            healing_amount = actions[1] * 5
+            if player.health + healing_amount >= 100:
+                print('Resting has let you fully heal')
+                player.health == 100
+            else:
+                print(f'Resting has let you regain {healing_amount} health')
+                player.health += healing_amount
+
         dead_survivors = []
         for survivor in survivors:
             survivor.next_day()
