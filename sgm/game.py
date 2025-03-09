@@ -26,8 +26,26 @@ def game():
 
         # Scavenge
         if actions[0] > 0:
-            food = math.floor(random.randrange(0, actions[0]) / 2)
+            food = math.ceil(random.randrange(0, actions[0]) / 2)
             print(f'You have found {food} pieces of food')
+
+            found_survivor = random.randrange(0, 100)
+            if found_survivor < actions[0]:
+                new_survivor = Survivor(random.randrange(1, 100), random.randrange(1, 100))
+                if new_survivor.health >= 50:
+                    print('You come across someone wandering the wastes. They seem to be holding up well.')
+                else:
+                    print('You stumble across someone else out in the wastes. They look like the wastes have taken its toll on them.')
+                decision = ''
+                while decision not in ['y', 'n']:
+                    print('Invite them back to the outpost? (y/n)')
+                    decision = input()
+                if decision == 'y':
+                    print('You give them diretions back to the outpost.')
+                    survivors.append(new_survivor)
+                else:
+                    print('You wish them well and carry on with your scavenging')
+
             while player.hunger < 50 and food > 0:
                 player.hunger += 7
                 food -= 1
